@@ -17,3 +17,4 @@
 
 // TODO: Replace this URL after your Render backend service is deployed.
 window.BACKEND_URL = 'http://127.0.0.1:8000';
+

@@ -44,3 +44,4 @@ services:
       - type: rewrite
         source: /*
         destination: /index.html  # SPA fallback (supports future React/Vue migration)
+
