@@ -16,5 +16,5 @@
  */
 
 // TODO: Replace this URL after your Render backend service is deployed.
-window.BACKEND_URL = 'http://127.0.0.1:8000';
+window.BACKEND_URL = 'http://127.0.0.1:https://student-mental-health-project-2093.onrender.com';
 
