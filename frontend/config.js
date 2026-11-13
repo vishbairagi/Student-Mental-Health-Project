@@ -9,7 +9,8 @@
  *
  * ── RENDER DEPLOYMENT ──────────────────────────────────────────────────────
  * After your Render backend service is live, replace the URL below with the
- * actual service URL shown in the Render dashboard, e.g.:
+ * actual service URL shown in the Render dasclea
+ * hboard, e.g.:
  *   https://student-mental-health-api.onrender.com
  *
  * Then commit + push — the static site will redeploy automatically.
