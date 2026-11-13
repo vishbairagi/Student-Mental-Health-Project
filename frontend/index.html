@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Social Media & Mental Health Prediction System</title>
+  <meta name="description" content="AI-powered regression dashboard predicting student Mental Health Scores from social media habits, sleep duration, physical activity, and stress indicators.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- Background ambient glow elements -->
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+
+  <div class="app-container">
+    <!-- Header Section -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="brand">
+          <div class="brand-icon">🧠</div>
+          <div>
+            <h1>Student Social Media & Mental Health Prediction System</h1>
+            <p class="subtitle">Evidence-based Machine Learning analysis of student screen habits, lifestyle balance, and mental well-being</p>
+          </div>
+        </div>
+        <div class="api-status-pill" id="api-status-pill">
+          <span class="status-dot" id="status-dot"></span>
+          <span class="status-text" id="status-text">Checking backend...</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-grid">
+      <!-- Left Column: Prediction Input Form -->
+      <section class="card form-card">
+        <div class="card-header">
+          <h2>Student Profile & Behavioral Indicators</h2>
+          <p class="card-desc">Enter the student's demographics, digital activity metrics, and lifestyle parameters to generate a prediction.</p>
+          <div class="quick-fill-bar">
+            <span>Quick fill presets:</span>
+            <button type="button" class="btn-preset" id="preset-healthy">🌟 Balanced Student</button>
+            <button type="button" class="btn-preset" id="preset-distressed">⚠️ High Screen Time</button>
+          </div>
+        </div>
+
+        <form id="prediction-form" novalidate>
+          <!-- Section 1: Demographics & Education -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="legend-num">1</span> Demographics & Academic Profile
+            </legend>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Age">Age (Years) <span class="required">*</span></label>
+                <input type="number" id="Age" name="Age" min="10" max="100" step="1" value="21" required placeholder="e.g. 21">
+                <span class="field-hint">Dataset typical range: 18 – 24</span>
+              </div>
+              <div class="form-group">
+                <label for="Gender">Gender <span class="required">*</span></label>
+                <select id="Gender" name="Gender" required>
+                  <option value="Female" selected>Female</option>
+                  <option value="Male">Male</option>
+                </select>
+                <span class="field-hint">Select biological or reported gender</span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Country">Country of Residence <span class="required">*</span></label>
+                <input type="text" id="Country" name="Country" list="country-list" value="USA" required placeholder="Type or select a country">
+                <datalist id="country-list">
+                  <option value="Afghanistan"><option value="Albania"><option value="Andorra"><option value="Argentina">
+                  <option value="Armenia"><option value="Australia"><option value="Austria"><option value="Azerbaijan">
+                  <option value="Bahamas"><option value="Bahrain"><option value="Bangladesh"><option value="Belarus">
+                  <option value="Belgium"><option value="Bhutan"><option value="Bolivia"><option value="Bosnia">
+                  <option value="Brazil"><option value="Bulgaria"><option value="Canada"><option value="Chile">
+                  <option value="China"><option value="Colombia"><option value="Costa Rica"><option value="Croatia">
+                  <option value="Cyprus"><option value="Czech Republic"><option value="Denmark"><option value="Ecuador">
+                  <option value="Egypt"><option value="Estonia"><option value="Finland"><option value="France">
+                  <option value="Georgia"><option value="Germany"><option value="Ghana"><option value="Greece">
+                  <option value="Hong Kong"><option value="Hungary"><option value="Iceland"><option value="India">
+                  <option value="Indonesia"><option value="Iraq"><option value="Ireland"><option value="Israel">
+                  <option value="Italy"><option value="Jamaica"><option value="Japan"><option value="Jordan">
+                  <option value="Kazakhstan"><option value="Kenya"><option value="Kosovo"><option value="Kuwait">
+                  <option value="Kyrgyzstan"><option value="Latvia"><option value="Lebanon"><option value="Liechtenstein">
+                  <option value="Lithuania"><option value="Luxembourg"><option value="Malaysia"><option value="Maldives">
+                  <option value="Malta"><option value="Mexico"><option value="Moldova"><option value="Monaco">
+                  <option value="Montenegro"><option value="Morocco"><option value="Nepal"><option value="Netherlands">
+                  <option value="New Zealand"><option value="Nigeria"><option value="North Macedonia"><option value="Norway">
+                  <option value="Oman"><option value="Other"><option value="Pakistan"><option value="Panama">
+                  <option value="Paraguay"><option value="Peru"><option value="Philippines"><option value="Poland">
+                  <option value="Portugal"><option value="Qatar"><option value="Romania"><option value="Russia">
+                  <option value="San Marino"><option value="Serbia"><option value="Singapore"><option value="Slovakia">
+                  <option value="Slovenia"><option value="South Africa"><option value="South Korea"><option value="Spain">
+                  <option value="Sri Lanka"><option value="Sweden"><option value="Switzerland"><option value="Syria">
+                  <option value="Taiwan"><option value="Tajikistan"><option value="Thailand"><option value="Trinidad">
+                  <option value="Turkey"><option value="UAE"><option value="UK"><option value="USA">
+                  <option value="Ukraine"><option value="Uruguay"><option value="Uzbekistan"><option value="Vatican City">
+                  <option value="Venezuela"><option value="Vietnam"><option value="Yemen">
+                </datalist>
+                <span class="field-hint">111 countries available or type custom</span>
+              </div>
+              <div class="form-group">
+                <label for="Academic_Level">Academic Level <span class="required">*</span></label>
+                <select id="Academic_Level" name="Academic_Level" required>
+                  <option value="Undergraduate" selected>Undergraduate</option>
+                  <option value="Graduate">Graduate</option>
+                  <option value="High School">High School</option>
+                </select>
+                <span class="field-hint">Highest current academic enrollment</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Section 2: Social Media & Screen Habits -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="legend-num">2</span> Social Media & Digital Habits
+            </legend>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Most_Used_Platform">Most Used Platform <span class="required">*</span></label>
+                <select id="Most_Used_Platform" name="Most_Used_Platform" required>
+                  <option value="Instagram" selected>Instagram</option>
+                  <option value="TikTok">TikTok</option>
+                  <option value="YouTube">YouTube</option>
+                  <option value="Facebook">Facebook</option>
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Snapchat">Snapchat</option>
+                  <option value="Twitter">Twitter</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="WeChat">WeChat</option>
+                  <option value="LINE">LINE</option>
+                  <option value="KakaoTalk">KakaoTalk</option>
+                  <option value="VKontakte">VKontakte</option>
+                </select>
+                <span class="field-hint">Primary app consuming screen time</span>
+              </div>
+              <div class="form-group">
+                <label for="Purpose_Of_Use">Purpose of Use <span class="required">*</span></label>
+                <select id="Purpose_Of_Use" name="Purpose_Of_Use" required>
+                  <option value="Entertainment" selected>Entertainment</option>
+                  <option value="Education">Education</option>
+                  <option value="Networking">Networking</option>
+                  <option value="News">News</option>
+                </select>
+                <span class="field-hint">Primary motivation for accessing social apps</span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Avg_Daily_Usage_Hours">Daily Usage (Hours) <span class="required">*</span></label>
+                <input type="number" id="Avg_Daily_Usage_Hours" name="Avg_Daily_Usage_Hours" min="0" max="24" step="0.1" value="4.5" required placeholder="e.g. 4.5">
+                <span class="field-hint">Hours per day on social media platforms</span>
+              </div>
+              <div class="form-group">
+                <label for="Daily_Unlocks">Daily Phone Unlocks <span class="required">*</span></label>
+                <input type="number" id="Daily_Unlocks" name="Daily_Unlocks" min="0" max="1000" step="1" value="150" required placeholder="e.g. 150">
+                <span class="field-hint">Number of times phone screen is unlocked per day</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Section 3: Lifestyle & Stress Indicators -->
+          <fieldset class="form-section">
+            <legend class="section-legend">
+              <span class="legend-num">3</span> Lifestyle, Sleep & Stress Indicators
+            </legend>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Study_Hours">Daily Study Hours <span class="required">*</span></label>
+                <input type="number" id="Study_Hours" name="Study_Hours" min="0" max="24" step="0.1" value="3.5" required placeholder="e.g. 3.5">
+                <span class="field-hint">Self-study and coursework hours per day</span>
+              </div>
+              <div class="form-group">
+                <label for="Physical_Activity_Hours">Physical Activity (Hours) <span class="required">*</span></label>
+                <input type="number" id="Physical_Activity_Hours" name="Physical_Activity_Hours" min="0" max="24" step="0.1" value="1.5" required placeholder="e.g. 1.5">
+                <span class="field-hint">Exercise, sports, or gym hours per day (&ge; 0)</span>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="Sleep_Hours_Per_Night">Sleep per Night (Hours) <span class="required">*</span></label>
+                <input type="number" id="Sleep_Hours_Per_Night" name="Sleep_Hours_Per_Night" min="0" max="24" step="0.1" value="7.0" required placeholder="e.g. 7.0">
+                <span class="field-hint">Average restful sleep duration</span>
+              </div>
+              <div class="form-group">
+                <label for="Stress_Level">Perceived Stress Level <span class="required">*</span></label>
+                <select id="Stress_Level" name="Stress_Level" required>
+                  <option value="Low">Low</option>
+                  <option value="Medium" selected>Medium</option>
+                  <option value="High">High</option>
+                  <option value="Very High">Very High</option>
+                </select>
+                <span class="field-hint">Self-assessed academic & lifestyle stress</span>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Action Buttons -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" id="btn-predict">
+              <span class="btn-text">Predict Mental Health Score</span>
+              <span class="btn-spinner" id="btn-spinner" aria-hidden="true"></span>
+            </button>
+            <button type="button" class="btn btn-secondary" id="btn-reset">
+              Reset Form
+            </button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Right Column: Results & Diagnostic Panel -->
+      <aside class="side-column">
+        <!-- Error Alert Container -->
+        <div class="alert alert-error" id="error-alert" style="display: none;" role="alert">
+          <div class="alert-icon">⚠️</div>
+          <div class="alert-body">
+            <h4 class="alert-title" id="error-title">Prediction Request Failed</h4>
+            <div class="alert-msg" id="error-message"></div>
+          </div>
+          <button type="button" class="alert-close" id="error-close" aria-label="Close error">&times;</button>
+        </div>
+
+        <!-- Result Card -->
+        <section class="card result-card" id="result-card">
+          <!-- Initial Placeholder State -->
+          <div class="result-placeholder" id="result-placeholder">
+            <div class="placeholder-icon">📊</div>
+            <h3>Ready for Prediction</h3>
+            <p>Complete the student profile on the left and click <strong>Predict Mental Health Score</strong> to compute real-time inference using the trained Scikit-learn Random Forest regression model.</p>
+            <div class="model-badge-mini">
+              <span>Pipeline: ColumnTransformer &rarr; RandomForestRegressor</span>
+            </div>
+          </div>
+
+          <!-- Loading State -->
+          <div class="result-loading" id="result-loading" style="display: none;">
+            <div class="spinner-large"></div>
+            <h3>Evaluating Behavioral Indicators...</h3>
+            <p>Preprocessing inputs through standard scaling and categorical encoders...</p>
+          </div>
+
+          <!-- Active Prediction Result State -->
+          <div class="result-content" id="result-content" style="display: none;">
+            <div class="result-header">
+              <span class="result-badge-top">ML Prediction Result</span>
+              <span class="risk-badge" id="risk-badge">Moderate Risk</span>
+            </div>
+
+            <!-- Score Visual Display -->
+            <div class="score-display">
+              <div class="score-circle" id="score-circle">
+                <span class="score-number" id="score-number">6.50</span>
+                <span class="score-scale">out of 10.0</span>
+              </div>
+              <div class="score-meter-wrap">
+                <div class="meter-bar">
+                  <div class="meter-fill" id="meter-fill" style="width: 65%;"></div>
+                </div>
+                <div class="meter-labels">
+                  <span>1.0 (High Distress)</span>
+                  <span>5.5 (Average)</span>
+                  <span>10.0 (Thriving)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Clinical & Qualitative Interpretation -->
+            <div class="interpretation-box">
+              <h4>Clinical & Behavioral Interpretation</h4>
+              <p id="interpretation-text">Assessment loading...</p>
+            </div>
+
+            <!-- Detailed Metrics Summary Grid -->
+            <div class="metrics-grid">
+              <div class="metric-item">
+                <span class="metric-label">Model Pipeline</span>
+                <span class="metric-val" id="model-val">RandomForestRegressor</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Raw Regression Score</span>
+                <span class="metric-val" id="raw-val">6.5496</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Social Media Usage</span>
+                <span class="metric-val" id="usage-val">4.5 hrs/day</span>
+              </div>
+              <div class="metric-item">
+                <span class="metric-label">Sleep Duration</span>
+                <span class="metric-val" id="sleep-val">7.0 hrs/night</span>
+              </div>
+            </div>
+
+            <div class="timestamp-row">
+              <span>Computed at: <time id="pred-timestamp">--</time></span>
+            </div>
+          </div>
+        </section>
+
+        <!-- Model Transparency Card -->
+        <section class="card info-card">
+          <h3>Model Architecture & Training Context</h3>
+          <ul class="info-list">
+            <li><strong>Dataset:</strong> 5,000 real student lifestyle & academic records</li>
+            <li><strong>Input Features:</strong> Exactly 12 validated lifestyle indicators</li>
+            <li><strong>Target:</strong> Mental Health Score (Continuous 1.0 – 10.0 scale)</li>
+            <li><strong>Preprocessing:</strong> StandardScaler + OrdinalEncoder + OneHotEncoder</li>
+            <li><strong>Estimator:</strong> Scikit-learn Pipeline with RandomForestRegressor</li>
+            <li><strong>Validation:</strong> Evaluated with MAE, MSE, RMSE, and $R^2$</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+
+    <!-- Footer Disclaimer -->
+    <footer class="app-footer">
+      <div class="disclaimer">
+        <strong>⚠️ Clinical & Educational Disclaimer:</strong>
+        <p>This web application is developed strictly for educational, academic, and research purposes using a machine learning regression model. Predictions represent statistical estimations based on historical training data and <strong>do not constitute a formal psychiatric, psychological, or medical diagnosis</strong>. If you or someone you know is experiencing emotional distress or mental health challenges, please reach out to your university counseling center, healthcare provider, or a professional mental health crisis helpline.</p>
+      </div>
+      <div class="footer-meta">
+        <span>Student Social Media & Mental Health Prediction System &bull; FastAPI + Scikit-learn + Vanilla JS</span>
+      </div>
+    </footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
+

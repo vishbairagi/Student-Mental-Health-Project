@@ -1,0 +1,46 @@
+##############################################################################
+# render.yaml — Render Blueprint: Infrastructure-as-Code
+# Defines both the FastAPI backend (Web Service) and the
+# Vanilla JS frontend (Static Site) for one-click deployment.
+#
+# USAGE:
+#   1. Push this repo to GitHub/GitLab.
+#   2. Go to https://dashboard.render.com → "New" → "Blueprint"
+#   3. Connect your repo — Render auto-reads this file.
+##############################################################################
+
+services:
+
+  # ── Backend: FastAPI + Uvicorn ─────────────────────────────────────────────
+  - type: web
+    name: student-mental-health-api
+    runtime: python
+    region: singapore           # Closest to India; change to 'ohio' or 'frankfurt' if needed
+    plan: free                  # Free tier (spins down after 15 min inactivity)
+    rootDir: .                  # Project root (where models/ lives)
+    buildCommand: "pip install -r backend/requirements.txt"
+    startCommand: "uvicorn backend.main:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 10000
+    healthCheckPath: /health    # Render pings this to verify startup
+
+  # ── Frontend: Vanilla HTML/CSS/JS Static Site ─────────────────────────────
+  - type: static
+    name: student-mental-health-ui
+    rootDir: frontend
+    buildCommand: ""            # No build step needed (pure HTML/CSS/JS)
+    staticPublishPath: .        # Serve from frontend/ directory directly
+    headers:
+      - path: /*
+        name: X-Frame-Options
+        value: DENY
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html  # SPA fallback (supports future React/Vue migration)
